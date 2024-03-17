@@ -1,13 +1,18 @@
 import {FactWidget} from "../../../widgets/FactWidget";
-import style from './style.module.scss'
 import React from "react";
+import style from './style.module.scss'
 import {AgeWidget} from "../../../widgets/AgeWidget";
+import {Div, PanelHeader} from "@vkontakte/vkui";
 
 export const MainPage = () => {
   return (
-    <div className={style.mainPage}>
-      <FactWidget />
-      <AgeWidget />
-    </div>
+    <>
+      <PanelHeader> VK Internship Test </PanelHeader>
+      <Div className={style.mainPage}>
+        <FactWidget />
+        <AgeWidget />
+      </Div>
+    </>
+
   );
 }

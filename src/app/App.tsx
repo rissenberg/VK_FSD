@@ -1,14 +1,20 @@
 import React from 'react';
-import './style/index.scss';
 import {MainPage} from "../pages/LandingPage";
 import {QueryProvider} from "./providers/QueryProvider";
+import {AppRoot, Panel, usePlatform, View} from "@vkontakte/vkui";
 
 function App() {
+  const platform = usePlatform();
+
   return (
     <QueryProvider>
-      <div className="App">
-        <MainPage/>
-      </div>
+      <AppRoot mode="full">
+        <View activePanel="main">
+            <Panel id="main">
+              <MainPage/>
+            </Panel>
+        </View>
+      </AppRoot>
     </QueryProvider>
   );
 }

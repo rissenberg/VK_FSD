@@ -1,7 +1,13 @@
 .mainPage {
   display: flex;
   flex-flow: column;
-  justify-content: center;
-  align-items: center;
-  gap: 15px;
+  min-width: 750px;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 767px) {
+  .mainPage {
+    min-width: unset;
+    margin: unset;
+  }
 }

@@ -5,6 +5,7 @@ import {SimpleFetch} from "../../../shared/utils/SimpleFetch";
 import {validateEnglishText} from "../../../shared/validators/validateEnglishText";
 import {AgeResponse} from "../types/types";
 import {QueryArg} from "../../../shared/types";
+import {Button, FormItem, FormStatus, Input} from "@vkontakte/vkui";
 
 const AGE_API_URL: string = 'https://api.agify.io';
 
@@ -54,7 +55,7 @@ export const AgeForm = () => {
   }
 
   const sendRequest = () => {
-    // Равносильно, если input пустой или имя такое же, как в предыдущем запросе
+    // Равносильно, что: если input пустой или имя такое же, как в предыдущем запросе
     if (!queryArg || (data && data.name === queryArg.value))
       return;
 
@@ -63,8 +64,9 @@ export const AgeForm = () => {
       setValidatorError('Only english alphabet is allowed');
       return;
     }
-
     setValidatorError('');
+
+
     queryClient.cancelQueries({
       queryKey: ['getAge'],
     }).then(() => {
@@ -84,32 +86,19 @@ export const AgeForm = () => {
 
   return (
     <form className={style.form} onSubmit={handleSubmit}>
-      <div className={style.inputContainer}>
-        <input type="text"
-               className={style.formInput}
-               onInput={handleInput}
+      {validatorError &&  <FormStatus header={validatorError} mode="error"/>}
+      {error &&  <FormStatus header={error.toString()} mode="error"/>}
+
+      <FormItem htmlFor="nameInput" top="Enter name">
+        <Input type="text" id="nameInput" onInput={handleInput} />
+      </FormItem>
+
+      <Button type="submit" size="m" loading={isFetching}> Get! </Button>
+
+      {(!error && data) &&
+        <FormStatus mode="default"
+          header={data && ( data.age ? `Person ${data.name} is ${data.age} year old` : 'Not found' )}
         />
-        <button className={style.submitButton}> Get </button>
-      </div>
-
-      {validatorError &&
-          <div className={style.errorField}>
-            {validatorError}
-          </div>
-      }
-
-      {error &&
-        <div className={style.errorField}>
-          {error.toString()}
-        </div>
-      }
-
-      {!error &&
-        <div className={style.resultField}>
-          {isFetching ? 'Loading...' :
-            data && ( data.age ? `Person ${data.name} is ${data.age} year old` : 'Not found' )
-          }
-        </div>
       }
     </form>
   )

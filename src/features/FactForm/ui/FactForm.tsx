@@ -4,6 +4,7 @@ import {setTextareaCursor} from "../lib/setCursor";
 import {useQuery, useQueryClient} from "@tanstack/react-query";
 import {SimpleFetch} from "../../../shared/utils/SimpleFetch";
 import {FactResponse} from "../types/types";
+import {Button, FormStatus, Textarea} from "@vkontakte/vkui";
 
 const FACT_API_URL: string = 'https://catfact.ninja/fact';
 
@@ -35,18 +36,17 @@ export const FactForm = () => {
 
   return (
     <form className={style.form} onSubmit={handleSubmit}>
-      {error &&
-          <div className={style.errorField}>
-            {error.toString()}
-          </div>
-      }
-      <textarea className={style.textArea}
-                ref={textareaRef}
+      {error && <FormStatus header={error.toString()} mode="error"/>}
+
+      <Textarea getRef={textareaRef}
+                className={style.textArea}
                 value={data && data.fact}
+                placeholder="Facts will be here"
       />
-      <button className={style.submitButton} type={'submit'}>
-        {isFetching ? 'Loading...' : 'Get more!'}
-      </button>
+
+      <Button type='submit' size="m" loading={isFetching}>
+        Get more!
+      </Button>
     </form>
   )
 }

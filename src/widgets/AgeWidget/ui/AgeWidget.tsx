@@ -1,12 +1,11 @@
 import {AgeForm} from "../../../features/AgeForm";
-import style from './style.module.scss'
+import {Group, Header} from "@vkontakte/vkui";
 
 export const AgeWidget = () => {
 
   return (
-    <div className={style.ageContainer}>
-      GET AGE FROM NAME
+    <Group header={<Header mode="primary">GET AGE FROM NAME</Header>}>
       <AgeForm />
-    </div>
+    </Group>
   );
 }
