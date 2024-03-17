@@ -1,17 +1,17 @@
-interface QueryArg {
-  name: string,
+export interface QueryArg {
+  parameter: string,
   value: string,
 }
 
-export const SimpleFetch = async (url: string, queryArgs: QueryArg[] = []) => {
+export const SimpleFetch = async (url: string, signal: AbortSignal, queryArgs: QueryArg[] = []) => {
   if (queryArgs.length > 0) {
     const queryString = queryArgs.map((arg) =>
-      arg.name + '=' + arg.value
+      arg.parameter + '=' + arg.value
     ).join('&');
     url += '?' + queryString;
   }
   try {
-    const res = await fetch(url);
+    const res = await fetch(url, {signal});
     if (!res.ok) {
       throw new Error(`Fetch status ${res.status}`);
     }

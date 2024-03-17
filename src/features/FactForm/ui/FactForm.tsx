@@ -4,7 +4,7 @@ import {setTextareaCursor} from "../lib/setCursor";
 import {useQuery, useQueryClient} from "@tanstack/react-query";
 import {SimpleFetch} from "../../../shared/utils/SimpleFetch";
 
-const Fact_API_URL: string = 'https://catfact.ninja/fact';
+const FACT_API_URL: string = 'https://catfact.ninja/fact';
 
 interface FactResponse {
   fact: string,
@@ -15,9 +15,9 @@ export const FactForm = () => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const queryClient = useQueryClient();
 
-  const { data, refetch, error, isLoading } = useQuery<FactResponse>({
+  const { data, refetch, error, isFetching } = useQuery<FactResponse>({
     queryKey: ['getFact'],
-    queryFn: () => SimpleFetch(Fact_API_URL),
+    queryFn: ({signal}) => SimpleFetch(FACT_API_URL, signal),
     enabled: false,
     retryDelay: 1000,
   });
@@ -48,7 +48,7 @@ export const FactForm = () => {
                 value={data && data.fact}
       />
       <button className={style.submitButton} type={'submit'}>
-        {isLoading ? 'Loading...' : 'Get more!'}
+        {isFetching ? 'Loading...' : 'Get more!'}
       </button>
     </form>
   )
