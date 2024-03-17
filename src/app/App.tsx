@@ -1,12 +1,15 @@
 import React from 'react';
 import './style/index.scss';
 import {MainPage} from "../pages/LandingPage";
+import {QueryProvider} from "./providers/QueryProvider";
 
 function App() {
   return (
-    <div className="App">
-        <MainPage />
-    </div>
+    <QueryProvider>
+      <div className="App">
+        <MainPage/>
+      </div>
+    </QueryProvider>
   );
 }
 
