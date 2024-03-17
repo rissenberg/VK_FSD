@@ -1,12 +1,11 @@
 import {FactForm} from "../../../features/FactForm";
-import style from './style.module.scss'
+import {Group, Header} from "@vkontakte/vkui";
 
 export const FactWidget = () => {
 
   return (
-    <div className={style.factContainer}>
-      CATS FACTS
+    <Group header={<Header mode="primary">CATS FACTS</Header>}>
       <FactForm />
-    </div>
+    </Group>
   );
 }
