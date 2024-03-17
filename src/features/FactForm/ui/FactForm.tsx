@@ -3,13 +3,9 @@ import React, {useEffect, useRef} from "react";
 import {setTextareaCursor} from "../lib/setCursor";
 import {useQuery, useQueryClient} from "@tanstack/react-query";
 import {SimpleFetch} from "../../../shared/utils/SimpleFetch";
+import {FactResponse} from "../types/types";
 
 const FACT_API_URL: string = 'https://catfact.ninja/fact';
-
-interface FactResponse {
-  fact: string,
-  length: number
-}
 
 export const FactForm = () => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -22,6 +18,7 @@ export const FactForm = () => {
     retryDelay: 1000,
   });
 
+  // При получении ответа на запрос, курсор переместится после первого слова
   useEffect(() => {
     setTextareaCursor(textareaRef.current);
   }, [data]);

@@ -1,3 +1,10 @@
+/**
+ * Реализация перемещения курсора после первого слова
+ *
+ * @function
+ * @param {HTMLTextAreaElement} textarea - Элемент ДОМ
+ * @return void
+ */
 export const setTextareaCursor = (textarea: HTMLTextAreaElement | null) => {
   if (textarea) {
     const startPos = textarea.value.indexOf(' ');

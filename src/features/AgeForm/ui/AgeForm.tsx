@@ -3,16 +3,14 @@ import React, {useEffect, useRef, useState} from "react";
 import {useQuery, useQueryClient} from "@tanstack/react-query";
 import {QueryArg, SimpleFetch} from "../../../shared/utils/SimpleFetch";
 import {validateEnglishText} from "../../../shared/validators/validateEnglishText";
+import {AgeResponse} from "../types/types";
 
 const AGE_API_URL: string = 'https://api.agify.io';
 
-interface AgeResponse {
-  name: string,
-  age: number
-}
-
 export const AgeForm = () => {
+  // Референс таймера отправки запросов
   const timerRef = useRef<NodeJS.Timeout>();
+  // Объект, содержащий query запрос - название параметра и его значение
   const [queryArg, setQueryArg] = useState<QueryArg | null>(null);
   const [validatorError, setValidatorError] = useState<string>('');
   const queryClient = useQueryClient();
@@ -28,12 +26,14 @@ export const AgeForm = () => {
     retryDelay: 1000,
   });
 
+  // Реализация таймера отправки запроса
   useEffect(() => {
     timerRef.current = setTimeout(sendRequest, 3000);
 
     return () => clearTimeout(timerRef.current);
   }, [queryArg]);
 
+  // Реализация таймера проверки введенных данных
   useEffect(() => {
     const validatorTimer = setTimeout(() => {
         setValidatorError(queryArg && !validateEnglishText(queryArg.value) ?
@@ -53,9 +53,11 @@ export const AgeForm = () => {
   }
 
   const sendRequest = () => {
+    // Равносильно, если input пустой или имя такое же, как в предыдущем запросе
     if (!queryArg || (data && data.name === queryArg.value))
       return;
 
+    // Еще одна валидация, если таймер не успел сработать
     if (!validateEnglishText(queryArg.value)) {
       setValidatorError('Only english alphabet is allowed');
       return;
