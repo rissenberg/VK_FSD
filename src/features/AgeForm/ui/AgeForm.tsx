@@ -1,9 +1,10 @@
 import style from "./style.module.scss"
 import React, {useEffect, useRef, useState} from "react";
 import {useQuery, useQueryClient} from "@tanstack/react-query";
-import {QueryArg, SimpleFetch} from "../../../shared/utils/SimpleFetch";
+import {SimpleFetch} from "../../../shared/utils/SimpleFetch";
 import {validateEnglishText} from "../../../shared/validators/validateEnglishText";
 import {AgeResponse} from "../types/types";
+import {QueryArg} from "../../../shared/types";
 
 const AGE_API_URL: string = 'https://api.agify.io';
 

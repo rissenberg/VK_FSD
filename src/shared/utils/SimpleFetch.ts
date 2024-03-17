@@ -1,4 +1,4 @@
-import {QueryArg} from "../types/types";
+import {QueryArg} from "../types";
 
 /**
  * Функция, отправляющая GET запрос с выбранными query параметрами
