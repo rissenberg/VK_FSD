@@ -1,0 +1,27 @@
+.form {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-content: center;
+  gap: 15px;
+  margin-top: 12px;
+}
+
+.textArea {
+  font-size: 20px;
+  height: 120px;
+  padding: 20px;
+  resize: none;
+}
+
+.submitButton {
+  font-size: 16px;
+  padding: 10px 20px;
+}
+
+.errorField {
+  padding-left: 20px;
+  font-size: 18px;
+  text-align: start;
+  color: #ff3d37;
+}

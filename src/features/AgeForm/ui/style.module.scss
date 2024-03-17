@@ -1,0 +1,36 @@
+.form {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-content: center;
+  gap: 15px;
+  margin-top: 16px;
+}
+
+.inputContainer {
+  display: flex;
+}
+
+.formInput {
+  font-size: 16px;
+  padding: 10px;
+  flex: 1;
+}
+
+.submitButton {
+  font-size: 16px;
+  padding: 10px 20px;
+}
+
+.resultField {
+  padding: 10px 20px;
+  font-size: 18px;
+  text-align: start;
+}
+
+.errorField {
+  padding: 10px 0 0 20px;
+  font-size: 18px;
+  text-align: start;
+  color: #ff3d37;
+}
